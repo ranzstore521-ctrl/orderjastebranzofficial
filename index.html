@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Jasteb - Paket VIP & Unchek Berkualitas</title>
+    <style>
+        :root {
+            --primary: #25D366;
+            --primary-dark: #128C7E;
+            --secondary: #075E54;
+            --accent: #DCF8C6;
+            --light: #ffffff;
+            --dark: #1a1a1a;
+            --gray: #f5f5f5;
+            --text: #333333;
+            --vip: #FF6B6B;
+            --unchek: #4ECDC4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--secondary), var(--primary-dark));
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .content {
+            padding: 25px;
+        }
+        
+        .package-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .vip-title {
+            color: var(--vip);
+        }
+        
+        .unchek-title {
+            color: var(--unchek);
+        }
+        
+        .section-icon {
+            margin-right: 10px;
+            font-size: 1.6rem;
+        }
+        
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .package-card {
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vip-card {
+            border-left: 4px solid var(--vip);
+        }
+        
+        .unchek-card {
+            border-left: 4px solid var(--unchek);
+        }
+        
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .package-card.selected {
+            background-color: var(--accent);
+            border-color: var(--primary);
+        }
+        
+        .package-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .vip-price {
+            color: var(--vip);
+        }
+        
+        .unchek-price {
+            color: var(--unchek);
+        }
+        
+        .package-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.2);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .order-summary {
+            background-color: var(--gray);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+            display: none;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+        
+        .success-message {
+            background-color: var(--accent);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--gray);
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .package-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .package-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🛍️</div>
+            <h1>Order Jasteb - Paket VIP & Unchek</h1>
+            <p class="subtitle">Pesan paket Jasteb dengan mudah dan cepat</p>
+        </header>
+        
+        <div class="content">
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="name">Nama Lengkap</label>
+                    <input type="text" id="name" placeholder="Masukkan nama lengkap" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Nomor WhatsApp</label>
+                    <input type="tel" id="phone" placeholder="Contoh: 628123456789" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Alamat Lengkap</label>
+                    <textarea id="address" rows="3" placeholder="Masukkan alamat lengkap pengiriman" required></textarea>
+                </div>
+                
+                <div class="package-section">
+                    <h2 class="section-title vip-title">
+                        <span class="section-icon">👑</span>
+                        JASTEB VIP
+                    </h2>
+                    <div class="package-grid" id="vipPackages">
+                        <!-- VIP packages will be generated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="package-section">
+                    <h2 class="section-title unchek-title">
+                        <span class="section-icon">✅</span>
+                        UNCHEK BERKUALITAS
+                    </h2>
+                    <div class="package-grid" id="unchekPackages">
+                        <!-- Unchek packages will be generated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Catatan Tambahan (Opsional)</label>
+                    <textarea id="notes" rows="2" placeholder="Catatan khusus untuk pesanan"></textarea>
+                </div>
+                
+                <button type="button" class="btn" id="orderBtn">Pesan Sekarang</button>
+            </form>
+            
+            <div class="order-summary" id="orderSummary">
+                <h3>Ringkasan Pesanan</h3>
+                <div class="summary-item">
+                    <span>Paket:</span>
+                    <span id="summaryPackage">-</span>
+                </div>
+                <div class="summary-item">
+                    <span>Harga:</span>
+                    <span id="summaryPrice">-</span>
+                </div>
+                <div class="summary-item">
+                    <span>Jenis:</span>
+                    <span id="summaryType">-</span>
+                </div>
+                <div class="summary-item total">
+                    <span>Total:</span>
+                    <span id="summaryTotal">-</span>
+                </div>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                <h3>✅ Pesanan Berhasil!</h3>
+                <p>Terima kasih atas pesanan Anda. CS kami akan segera menghubungi Anda via WhatsApp.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Order Jasteb Otomatis | CS: 6289528051281</p>
+        </footer>
+    </div>
+    
+    <a href="https://wa.me/6289528051281?text=Halo%20CS%20Jasteb,%20saya%20ingin%20bertanya%20tentang%20produk%20Jasteb" class="whatsapp-float" target="_blank">
+        💬
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const vipPackages = [
+                { price: 5000, result: "100+ RESULT" },
+                { price: 10000, result: "200+ RESULT" },
+                { price: 15000, result: "300+ RESULT" },
+                { price: 20000, result: "400+ RESULT" },
+                { price: 25000, result: "500+ RESULT" },
+                { price: 30000, result: "600+ RESULT" },
+                { price: 35000, result: "700+ RESULT" },
+                { price: 40000, result: "800+ RESULT" },
+                { price: 45000, result: "900+ RESULT" },
+                { price: 50000, result: "1300+ RESULT" }
+            ];
+            
+            const unchekPackages = [
+                { price: 10000, result: "25 UNCHEK" },
+                { price: 20000, result: "50 UNCHEK" },
+                { price: 30000, result: "75 UNCHEK" },
+                { price: 40000, result: "100 UNCHEK" },
+                { price: 50000, result: "125 UNCHEK" },
+                { price: 60000, result: "150 UNCHEK" },
+                { price: 70000, result: "175 UNCHEK" },
+                { price: 80000, result: "200 UNCHEK" }
+            ];
+            
+            const vipContainer = document.getElementById('vipPackages');
+            const unchekContainer = document.getElementById('unchekPackages');
+            const orderBtn = document.getElementById('orderBtn');
+            const orderSummary = document.getElementById('orderSummary');
+            const successMessage = document.getElementById('successMessage');
+            
+            let selectedPackage = null;
+            let selectedType = null;
+            let selectedPrice = 0;
+            
+            // Generate VIP packages
+            vipPackages.forEach(pkg => {
+                const card = document.createElement('div');
+                card.className = 'package-card vip-card';
+                card.setAttribute('data-price', pkg.price);
+                card.setAttribute('data-result', pkg.result);
+                card.setAttribute('data-type', 'VIP');
+                
+                card.innerHTML = `
+                    <div class="package-price vip-price">Rp ${pkg.price.toLocaleString('id-ID')}</div>
+                    <div class="package-desc">${pkg.result}</div>
+                `;
+                
+                card.addEventListener('click', function() {
+                    selectPackage(this, 'VIP', pkg.price, pkg.result);
+                });
+                
+                vipContainer.appendChild(card);
+            });
+            
+            // Generate Unchek packages
+            unchekPackages.forEach(pkg => {
+                const card = document.createElement('div');
+                card.className = 'package-card unchek-card';
+                card.setAttribute('data-price', pkg.price);
+                card.setAttribute('data-result', pkg.result);
+                card.setAttribute('data-type', 'UNCHEK');
+                
+                card.innerHTML = `
+                    <div class="package-price unchek-price">Rp ${pkg.price.toLocaleString('id-ID')}</div>
+                    <div class="package-desc">${pkg.result}</div>
+                `;
+                
+                card.addEventListener('click', function() {
+                    selectPackage(this, 'UNCHEK', pkg.price, pkg.result);
+                });
+                
+                unchekContainer.appendChild(card);
+            });
+            
+            // Pilih paket
+            function selectPackage(card, type, price, result) {
+                // Hapus seleksi sebelumnya
+                document.querySelectorAll('.package-card').forEach(c => {
+                    c.classList.remove('selected');
+                });
+                
+                // Tandai yang dipilih
+                card.classList.add('selected');
+                
+                selectedPackage = `${price.toLocaleString('id-ID')} - ${result}`;
+                selectedType = type;
+                selectedPrice = price;
+                
+                updateOrderSummary();
+            }
+            
+            // Update ringkasan pesanan
+            function updateOrderSummary() {
+                if (selectedPackage) {
+                    document.getElementById('summaryPackage').textContent = selectedPackage;
+                    document.getElementById('summaryPrice').textContent = 'Rp ' + selectedPrice.toLocaleString('id-ID');
+                    document.getElementById('summaryType').textContent = selectedType;
+                    document.getElementById('summaryTotal').textContent = 'Rp ' + selectedPrice.toLocaleString('id-ID');
+                    
+                    orderSummary.style.display = 'block';
+                }
+            }
+            
+            // Proses pesanan
+            orderBtn.addEventListener('click', function() {
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const address = document.getElementById('address').value;
+                const notes = document.getElementById('notes').value;
+                
+                if (!name || !phone || !address || !selectedPackage) {
+                    alert('Harap lengkapi semua data yang diperlukan dan pilih paket!');
+                    return;
+                }
+                
+                // Format pesan untuk WhatsApp
+                const message = `Halo CS Jasteb, saya ingin memesan:
+                
+Nama: ${name}
+No. WhatsApp: ${phone}
+Alamat: ${address}
+Paket: ${selectedType} - ${selectedPackage}
+Total: Rp ${selectedPrice.toLocaleString('id-ID')}
+${notes ? `Catatan: ${notes}` : ''}
+
+Saya memesan melalui website order otomatis. Terima kasih.`;
+                
+                // Encode pesan untuk URL
+                const encodedMessage = encodeURIComponent(message);
+                
+                // Redirect ke WhatsApp
+                window.open(`https://wa.me/6289528051281?text=${encodedMessage}`, '_blank');
+                
+                // Tampilkan pesan sukses
+                successMessage.style.display = 'block';
+                
+                // Reset form setelah 5 detik
+                setTimeout(function() {
+                    document.getElementById('orderForm').reset();
+                    document.querySelectorAll('.package-card').forEach(c => c.classList.remove('selected'));
+                    orderSummary.style.display = 'none';
+                    successMessage.style.display = 'none';
+                    selectedPackage = null;
+                    selectedType = null;
+                    selectedPrice = 0;
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>
